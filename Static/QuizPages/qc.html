@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - C Basics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .quiz-container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .quiz-header h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .progress-bar-container {
+            width: 100%;
+            background-color: #f1f1f1;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 10px;
+            width: 0;
+            background-color: #4caf50;
+            transition: width 0.5s;
+        }
+        .question-container h3 {
+            font-size: 22px;
+            color: #333;
+        }
+        .option-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option-button.selected {
+            background-color: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+        .btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h2>C Programming Basics Quiz</h2>
+        <div class="question-number">Question 1 of 8</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" style="width: 12.5%"></div>
+    </div>
+
+    <div class="question-container">
+        <h3>What is the extension of a C program file?</h3>
+    </div>
+
+    <div class="options-container">
+        <!-- Options will be dynamically added here -->
+    </div>
+
+    <div class="navigation-buttons">
+        <button class="btn btn-disabled" id="prev-btn" disabled onclick="prevQuestion()">Previous</button>
+        <button class="btn btn-disabled" id="next-btn" disabled onclick="nextQuestion()">Next</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "What is the extension of a C program file?",
+            options: [".c", ".cpp", ".java", ".py"]
+        },
+        {
+            question: "Which function is used to print in C?",
+            options: ["printf()", "scanf()", "print()", "output()"]
+        },
+        {
+            question: "Who is the father of C programming language?",
+            options: ["Dennis Ritchie", "Bjarne Stroustrup", "James Gosling", "Guido van Rossum"]
+        },
+        {
+            question: "Which header file is required to use printf()?",
+            options: ["<stdio.h>", "<conio.h>", "<string.h>", "<math.h>"]
+        },
+        {
+            question: "What is the size of an int in C?",
+            options: ["4 bytes", "2 bytes", "8 bytes", "1 byte"]
+        },
+        {
+            question: "Which symbol is used to comment in C?",
+            options: ["//", "#", "<!-- -->", "/* */"]
+        },
+        {
+            question: "Which of the following is a keyword in C?",
+            options: ["switch", "function", "define", "procedure"]
+        },
+        {
+            question: "Which operator is used for logical AND in C?",
+            options: ["&&", "||", "!", "&"]
+        }
+    ];
+
+    let currentQuestion = 0;
+    let selectedOptions = Array(questions.length).fill(null); // Track selected options for all questions
+
+    function loadQuestion(index) {
+        const question = questions[index];
+        document.querySelector('.question-number').textContent = `Question ${index + 1} of ${questions.length}`;
+        document.querySelector('.question-container h3').textContent = question.question;
+
+        const optionsContainer = document.querySelector('.options-container');
+        optionsContainer.innerHTML = ''; // Clear previous options
+
+        question.options.forEach((option, i) => {
+            const button = document.createElement('button');
+            button.classList.add('option-button');
+            button.textContent = option;
+
+            // Highlight the previously selected option
+            if (selectedOptions[index] === i) {
+                button.classList.add('selected');
+            }
+
+            button.onclick = function () {
+                selectOption(button, i);
+            };
+            optionsContainer.appendChild(button);
+        });
+
+        // Update button states
+        updateButtonState();
+    }
+
+    function selectOption(button, optionIndex) {
+        // Unselect previously selected option
+        const options = document.querySelectorAll('.option-button');
+        options.forEach((btn) => btn.classList.remove('selected'));
+
+        // Select the new option
+        button.classList.add('selected');
+        selectedOptions[currentQuestion] = optionIndex; // Save the selected option
+
+        updateButtonState();
+    }
+
+    function updateButtonState() {
+        // Enable or disable the previous button
+        document.getElementById('prev-btn').disabled = currentQuestion === 0;
+
+        // Enable or disable the next button
+        document.getElementById('next-btn').disabled = currentQuestion === questions.length - 1;
+
+        // Enable the next button if an option is selected
+        if (selectedOptions[currentQuestion] !== null) {
+            document.getElementById('next-btn').classList.remove('btn-disabled');
+        } else {
+            document.getElementById('next-btn').classList.add('btn-disabled');
+        }
+
+        // Update progress bar
+        document.querySelector('.progress-bar').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            loadQuestion(currentQuestion);
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            loadQuestion(currentQuestion);
+        }
+    }
+
+    // Initialize the quiz
+    loadQuestion(currentQuestion);
+</script>
+
+</body>
+</html>

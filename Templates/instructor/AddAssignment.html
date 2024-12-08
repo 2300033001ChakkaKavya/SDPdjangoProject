@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Assignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-section {
+            width: 100%;
+            max-width: 500px;
+            margin: 2em auto;
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            text-align: center;
+            margin-bottom: 1.5em;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5em;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75em 1.5em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #565e64;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5em;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="form-section">
+        <h2>Add Assignment</h2>
+        <form action="{% url 'instructor:add_assignment' %}" method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="title">Assignment Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter assignment title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Assignment Description:</label>
+                <textarea id="description" name="description" rows="5" placeholder="Enter assignment description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline:</label>
+                <input type="datetime-local" id="deadline" name="deadline" required>
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn">Add Assignment</button>
+                <a href="#" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </section>
+
+</body>
+</html>

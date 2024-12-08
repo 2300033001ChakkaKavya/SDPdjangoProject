@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Chat Clone</h1>
+    <div id="chat-box">
+        <div id="messages"></div>
+    </div>
+    <textarea id="user-input" placeholder="Type your message here..."></textarea>
+    <button id="send-btn">Send</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#send-btn').click(function() {
+                const userMessage = $('#user-input').val();
+                $('#messages').append('<div><b>You:</b> ' + userMessage + '</div>');
+                $('#user-input').val('');
+
+                $.ajax({
+                    url: '/chatbot/api/chat/',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ message: userMessage }),
+                    success: function(response) {
+                        $('#messages').append('<div><b>AI:</b> ' + response.reply + '</div>');
+                    },
+                    error: function() {
+                        $('#messages').append('<div><b>AI:</b> Error occurred while processing your request.</div>');
+                        $('#messages').append('<div><b>AI:</b> sorry,Tryagain.</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

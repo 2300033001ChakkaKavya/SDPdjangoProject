@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Portfolio</title>
+    <style>
+        /* Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #faebd7;
+            border-bottom: 1px solid #ddd;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            margin: 0 15px;
+            color: #333;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        .navbar .btn {
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Full-Screen Sections */
+        .section {
+            height: 100vh; /* Full screen height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .section-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            text-align: left;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .section-image {
+            flex: 1;
+            max-width: 40%;
+            text-align: center;
+        }
+
+        .section-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-text {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .section .btn {
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .section .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Styling */
+        .footer {
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: #61dafb;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #007bff;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-content {
+                flex-direction: column;
+            }
+
+            .section-image,
+            .section-text {
+                max-width: 100%;
+            }
+
+            .section h1 {
+                font-size: 2rem;
+            }
+
+            .section p {
+                font-size: 1rem;
+            }
+
+            .section .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">EduLumen</div>
+        <div>
+            <a href="#section-1">Home</a>
+            <a href="#section-2">About</a>
+            <a href="#section-3">Glance</a>
+            <a href="#footer">Contact</a>
+        </div>
+        <div>
+            <a href="UserRegisterpagecall" class="btn">Sign Up</a>
+             <a href="UserLoginPageCall" class="btn">login</a>
+            <a href="feedback" class="btn">Feedback</a>
+        </div>
+    </div>
+
+    <!-- Full-Screen Sections -->
+    <div id="section-1" class="section section-1">
+        <div class="section-content">
+            <div class="section-text">
+                <h1>Welcome to Our Portfolio</h1>
+                <p>Online Course Management System (OCMS) is a dynamic platform designed to facilitate seamless interaction between students, instructors, and administrators. It allows instructors to upload and manage course materials, assignments, and quizzes, while students can easily access learning resources, submit assignments, and track progress. The system supports various user roles ensuring efficient course management and personalized learning experiences. Built on Django, it offers a secure, user-friendly interface that streamlines the educational process and enhances engagement. The way online courses are delivered and managed..</p>
+                <a href="#section-2" class="btn">Learn More</a>
+            </div>
+            <div class="section-image">
+                <img src="{% static 'Images/sup.jpg' %}">
+            </div>
+        </div>
+    </div>
+
+    <div id="section-2" class="section section-2">
+        <div class="section-content">
+            <div class="section-image">
+                <img src="{% static 'Images/i2.jpg' %}">
+            </div>
+            <div class="section-text">
+                <h1>About Us</h1>
+                <p>We are a team of passionate developers and educators dedicated to transforming online learning. Our Online Course Management System (OCMS) is designed to empower instructors and students by providing a streamlined platform for course creation, content delivery, and progress tracking. With an emphasis on simplicity, security, and user experience, our mission is to make education more accessible, engaging, and efficient for learners of all levels..</p>
+                <a href="#section-3" class="btn">View Glance</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-3" class="section section-3">
+        <div class="section-content">
+            <div class="section-text">
+                <h1>Learn with No-Limits</h1>
+                <p>Online learning offers flexibility, accessibility, and convenience, allowing students to learn at their own pace from anywhere in the world. With interactive resources, personalized learning paths, and the ability to balance education with personal commitments, online learning empowers individuals to achieve their academic goals in a modern, efficient way.
+
+.</p>
+                <a href="#footer" class="btn">Contact Us</a>
+            </div>
+            <div class="section-image">
+                <img src="{% static 'Images/l1.jpg' %}">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" class="footer">
+        <div>
+            <h1>Contact Us</h1>
+            <p>We’d love to hear from you! Whether you have questions, feedback, or inquiries about our Online Course Management System, feel free to reach out. Our team is here to assist you and ensure a smooth learning experience.</p>
+	    <div class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:your-email@example.com">chakkakavya9@gmail.com</a></p>
+            <p><strong>Phone:</strong> +123 456 7890</p>
+            <p><strong>Address:</strong> 123 Learning Street, Knowledge City, EduState</p>
+        </div>
+
+            <a href="#section-1">Back to Top</a>
+        </div>
+    </div>
+</body>
+</html>
